@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "nama": "Espresso",
+    "gambar_url": "assets/images/espresso.jpg",
+    "deskripsi": "Espresso adalah ekstrak kopi murni...",
+    "bahan": ["Biji Kopi Giling", "Air Panas"]
+  },
+  {
+    "id": 2,
+    "nama": "Latte",
+    "gambar_url": "assets/images/latte.jpg",
+    "deskripsi": "Caffè latte adalah minuman kopi...",
+    "bahan": ["Espresso", "Steamed Milk"]
+  }
+]
