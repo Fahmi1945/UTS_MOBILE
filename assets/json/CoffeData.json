@@ -1,16 +1,23 @@
 [
-  {
-    "id": 1,
-    "nama": "Espresso",
-    "gambar_url": "assets/images/espresso.jpg",
-    "deskripsi": "Espresso adalah ekstrak kopi murni...",
-    "bahan": ["Biji Kopi Giling", "Air Panas"]
-  },
-  {
-    "id": 2,
-    "nama": "Latte",
-    "gambar_url": "assets/images/latte.jpg",
-    "deskripsi": "Caffè latte adalah minuman kopi...",
-    "bahan": ["Espresso", "Steamed Milk"]
-  }
+    {
+        "id": 1,
+        "nama": "Caffè Latte",
+        "harga": "Rp 28.000",
+        "gambar_url": "assets/images/latte.jpg",
+        "deskripsi": "Caffè latte adalah minuman kopi yang terbuat dari espresso dan susu yang dipanaskan (steamed milk) dengan sedikit busa di atasnya."
+    },
+    {
+        "id": 2,
+        "nama": "Americano",
+        "harga": "Rp 25.000",
+        "gambar_url": "assets/images/americano.jpg",
+        "deskripsi": "Americano dibuat dengan menambahkan air panas ke dalam segelas espresso, memberikan kekuatan yang mirip dengan kopi tubruk."
+    },
+    {
+        "id": 3,
+        "nama": "Croissant",
+        "harga": "Rp 22.000",
+        "gambar_url": "assets/images/croissant.jpg",
+        "deskripsi": "Roti pastry renyah yang cocok sebagai pendamping kopi Anda."
+    }
 ]
