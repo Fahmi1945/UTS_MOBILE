@@ -3,21 +3,21 @@
         "id": 1,
         "nama": "Caffè Latte",
         "harga": "Rp 28.000",
-        "gambar_url": "assets/images/latte.jpg",
+        "gambar_url": "https://images.unsplash.com/photo-1511920170033-f8396924c348?fit=crop&w=600&q=80",
         "deskripsi": "Caffè latte adalah minuman kopi yang terbuat dari espresso dan susu yang dipanaskan (steamed milk) dengan sedikit busa di atasnya."
     },
     {
         "id": 2,
         "nama": "Americano",
         "harga": "Rp 25.000",
-        "gambar_url": "assets/images/americano.jpg",
+        "gambar_url": "https://images.unsplash.com/photo-1507133750040-6c8f57ddb2f4?fit=crop&w=400&q=80",
         "deskripsi": "Americano dibuat dengan menambahkan air panas ke dalam segelas espresso, memberikan kekuatan yang mirip dengan kopi tubruk."
     },
     {
         "id": 3,
         "nama": "Croissant",
         "harga": "Rp 22.000",
-        "gambar_url": "assets/images/croissant.jpg",
+        "gambar_url": "https://images.unsplash.com/photo-1530610476181-d83430b64dcd?fit=crop&w=600&q=80",
         "deskripsi": "Roti pastry renyah yang cocok sebagai pendamping kopi Anda."
     }
 ]
