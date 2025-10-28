@@ -1,11 +1,34 @@
-import 'dart:convert'; // Untuk json.decode
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http; // Untuk memanggil API
-import 'models/CoffeModel.dart'; // Import model kita
+import 'package:google_fonts/google_fonts.dart'; // Import Google Fonts
+import 'pages/MainWrapper.dart'; // Import file wrapper
 
 void main() {
   runApp(const MyApp());
 }
+
+// --- Kita buat palet warna kustom Anda ---
+// Ini adalah warna hijau utama Anda (#1BAE76)
+const MaterialColor kPrimaryGreen = MaterialColor(0xFF1BAE76, <int, Color>{
+  50: Color(0xFFE4F7EF),
+  100: Color(0xFFBBEBDA),
+  200: Color(0xFF8DE0C2),
+  300: Color(0xFF5FD5AA),
+  400: Color(0xFF3BCC97),
+  500: Color(0xFF1BAE76), // Warna utama Anda
+  600: Color(0xFF18A66E),
+  700: Color(0xFF149C63),
+  800: Color(0xFF109259),
+  900: Color(0xFF098047),
+});
+
+// Ini adalah warna latar belakang Anda (#EFEFEF)
+const Color kScaffoldBackground = Color(0xFFEFEFEF);
+// Ini adalah warna abu-abu untuk ikon/teks non-aktif (#808080)
+const Color kGreyColor = Color(0xFF808080);
+// Ini adalah warna teks utama Anda (#000000)
+const Color kBlackColor = Color(0xFF000000);
+// Ini adalah warna kartu/konten Anda (#FFFFFF)
+const Color kWhiteColor = Color(0xFFFFFFFF);
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -14,111 +37,89 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: CoffeeAPITester(), // Langsung ke halaman tester
-    );
-  }
-}
+      title: 'Green Cafe',
 
-class CoffeeAPITester extends StatefulWidget {
-  const CoffeeAPITester({Key? key}) : super(key: key);
+      // --- Di sinilah kita mengatur TEMA UTAMA Anda ---
+      theme: ThemeData(
+        // 1. Palet Warna
+        primarySwatch: kPrimaryGreen,
+        primaryColor: kPrimaryGreen,
+        scaffoldBackgroundColor:
+            kScaffoldBackground, // Latar belakang abu-abu pudar
+        cardColor: kWhiteColor, // Latar belakang kartu produk
+        // 2. Tema Font (Poppins & Sora)
+        textTheme: TextTheme(
+          // Font Judul (Misal: "Green Cafe", "Coffe Latte") - Pakai Sora
+          headlineLarge: GoogleFonts.sora(
+            fontWeight: FontWeight.bold,
+            color: kBlackColor,
+          ),
+          headlineMedium: GoogleFonts.sora(
+            fontWeight: FontWeight.w600,
+            color: kBlackColor,
+          ),
+          titleLarge: GoogleFonts.sora(
+            fontWeight: FontWeight.bold,
+            color: kBlackColor,
+          ),
+          titleMedium: GoogleFonts.sora(
+            fontWeight: FontWeight.w600,
+            color: kBlackColor,
+            fontSize: 16,
+          ),
+          titleSmall: GoogleFonts.sora(
+            fontWeight: FontWeight.w600,
+            color: kBlackColor,
+            fontSize: 14,
+          ),
 
-  @override
-  State<CoffeeAPITester> createState() => _CoffeeAPITesterState();
-}
+          // Font Body (Misal: "Rp 20.000", "Jl. Gajayana") - Pakai Poppins
+          bodyLarge: GoogleFonts.poppins(color: kBlackColor, fontSize: 16),
+          bodyMedium: GoogleFonts.poppins(color: kBlackColor, fontSize: 14),
+          bodySmall: GoogleFonts.poppins(
+            color: kGreyColor,
+            fontSize: 12,
+          ), // Teks abu-abu kecil
+        ),
 
-class _CoffeeAPITesterState extends State<CoffeeAPITester> {
-  // Variabel untuk menampung data dari API
-  late Future<List<Coffee>> _coffeeData;
+        // 3. Tema AppBar (Header Hijau)
+        appBarTheme: AppBarTheme(
+          backgroundColor: kPrimaryGreen,
+          elevation: 0, // Header tanpa bayangan
+          // Teks dan ikon di AppBar berwarna putih
+          titleTextStyle: GoogleFonts.sora(
+            color: kWhiteColor,
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
+          iconTheme: const IconThemeData(color: kWhiteColor),
+        ),
 
-  // --- GANTI URL INI DENGAN URL MOCKAPI ANDA ---
- final String apiUrl = "https://68fe947f7c700772bb1408b8.mockapi.io/coffee";
-  // --------------------------------------------------
+        // 4. Tema Bottom Navigation Bar (Sesuai Desain)
+        bottomNavigationBarTheme: BottomNavigationBarThemeData(
+          backgroundColor: kWhiteColor, // Latar belakang putih
+          selectedItemColor: kPrimaryGreen, // Ikon & Teks aktif (Dashboard)
+          unselectedItemColor: kGreyColor, // Ikon & Teks non-aktif (Cart, dll)
+          showSelectedLabels: true,
+          showUnselectedLabels: true,
+          type: BottomNavigationBarType.fixed, // Tipe standar
+          elevation: 2, // Beri sedikit bayangan
+        ),
 
-  @override
-  void initState() {
-    super.initState();
-    // Panggil fungsi untuk mengambil data API saat halaman dibuka
-    _coffeeData = _fetchCoffeeData();
-  }
+        // 5. Tema Tombol (Tombol '+' hijau)
+        floatingActionButtonTheme: const FloatingActionButtonThemeData(
+          backgroundColor: kPrimaryGreen,
+        ),
 
-  // Fungsi untuk mengambil dan mem-parsing data API
-  Future<List<Coffee>> _fetchCoffeeData() async {
-    // 1. Panggil API
-    final response = await http.get(Uri.parse(apiUrl));
-
-    // 2. Cek apakah berhasil (Status Code 200)
-    if (response.statusCode == 200) {
-      // 3. Ubah JSON (String) menjadi List<dynamic>
-      final List<dynamic> jsonList = json.decode(response.body);
-      
-      // 4. Ubah setiap item di List menjadi objek Coffee
-      return jsonList.map((json) => Coffee.fromJson(json)).toList();
-    } else {
-      // 5. Jika gagal, lemparkan error
-      throw Exception('Gagal memuat data dari API');
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Tes API Kopi"),
-        backgroundColor: Colors.brown,
-      ),
-      body: Center(
-        // FutureBuilder adalah widget terbaik untuk menangani data API
-        child: FutureBuilder<List<Coffee>>(
-          future: _coffeeData, // Sumber datanya dari API
-          builder: (context, snapshot) {
-            
-            // --- KASUS 1: API Sedang Loading ---
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const CircularProgressIndicator();
-            }
-
-            // --- KASUS 2: API Gagal (Error) ---
-            if (snapshot.hasError) {
-              return Text(
-                "Terjadi Error: ${snapshot.error}",
-                style: const TextStyle(color: Colors.red),
-              );
-            }
-
-            // --- KASUS 3: API Berhasil (hasData) ---
-            if (snapshot.hasData) {
-              final List<Coffee> coffees = snapshot.data!;
-              
-              // Tampilkan data dalam ListView sederhana
-              return ListView.builder(
-                itemCount: coffees.length,
-                itemBuilder: (context, index) {
-                  final coffee = coffees[index];
-                  
-                  // ListTile adalah cara simpel menampilkan data
-                  return ListTile(
-                    leading: Image.network(
-                      coffee.imageUrl,
-                      width: 50,
-                      fit: BoxFit.cover,
-                      // Error builder jika URL gambar bermasalah
-                      errorBuilder: (context, error, stackTrace) {
-                        return const Icon(Icons.broken_image, size: 50);
-                      },
-                    ),
-                    title: Text(coffee.name),
-                    subtitle: Text("Rp ${coffee.price.toStringAsFixed(0)}"),
-                    trailing: Text("ID: ${coffee.id}"),
-                  );
-                },
-              );
-            }
-
-            // --- KASUS 4: Data Kosong (Aneh, tapi mungkin terjadi) ---
-            return const Text("Tidak ada data");
-          },
+        cardTheme: CardThemeData(
+          color: kWhiteColor,
+          elevation: 1,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16.0),
+          ),
         ),
       ),
+      home: const MainWrapper(),
     );
   }
 }
