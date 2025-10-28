@@ -40,19 +40,19 @@ class ProfilePage extends StatelessWidget {
               _buildProfileInfo(
                 context,
                 icon: Icons.person_outline,
-                text: "Nama Anda Di Sini", // <-- Ganti Nama Anda
+                text: "Fahmi Zidan", // <-- Ganti Nama Anda
               ),
               const SizedBox(height: 16),
               _buildProfileInfo(
                 context,
                 icon: Icons.badge_outlined,
-                text: "NIM Anda Di Sini", // <-- Ganti NIM Anda
+                text: "230605110185", // <-- Ganti NIM Anda
               ),
               const SizedBox(height: 16),
               _buildProfileInfo(
                 context,
                 icon: Icons.class_outlined,
-                text: "Kelas Anda Di Sini", // <-- Ganti Kelas Anda
+                text: "Teori D", // <-- Ganti Kelas Anda
               ),
             ],
           ),
